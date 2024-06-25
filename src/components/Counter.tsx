@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "../redux/features/counterSlice";
+import {
+  decrement,
+  increment,
+  incrementByValue,
+} from "../redux/features/counterSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
-// counterSlice.ts
-
-export type TCounterState = {
-  counter: { count: number };
-};
 const Counter = () => {
-  const { count } = useSelector((state: TCounterState) => state.counter);
-  const dispatch = useDispatch();
+  const { count } = useAppSelector((state) => state.counter);
+  const dispatch = useAppDispatch();
 
   return (
-    <div className="flex w-full h-screen justify-center items-center">
+    <div className="flex gap-4 w-full h-screen justify-center items-center">
       <button
         onClick={() => dispatch(decrement())}
         type="button"
@@ -19,7 +18,7 @@ const Counter = () => {
       >
         Decrement
       </button>
-      <span className="flex p-4 me-3 text-white bg-purple-500 rounded-full">
+      <span className="flex p-4  text-white bg-purple-500 rounded-full">
         {count}
       </span>
 
@@ -29,6 +28,13 @@ const Counter = () => {
         className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
       >
         Increment
+      </button>
+      <button
+        onClick={() => dispatch(incrementByValue(5))}
+        type="button"
+        className="text-black bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+      >
+        Increment By Value
       </button>
     </div>
   );
